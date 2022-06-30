@@ -1,5 +1,9 @@
 package com.zipcodewilmington;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by leon on 1/29/18.
  */
@@ -25,7 +29,7 @@ public class StringArrayUtils {
      * @return last element in specified array
      */ // TODO
     public static String getLastElement(String[] array) {
-        return null;
+        return array[array.length-1];
     }
 
     /**
@@ -33,7 +37,7 @@ public class StringArrayUtils {
      * @return second to last element in specified array
      */ // TODO
     public static String getSecondToLastElement(String[] array) {
-        return null;
+        return array[array.length-2];
     }
 
     /**
@@ -42,7 +46,13 @@ public class StringArrayUtils {
      * @return true if the array contains the specified `value`
      */ // TODO
     public static boolean contains(String[] array, String value) {
-        return false;
+        boolean doesItContainValue = false;
+        for (String el : array) {
+            if (el.contains(value)) {
+                doesItContainValue = true;
+            }
+        }
+        return doesItContainValue;
     }
 
     /**
@@ -50,7 +60,14 @@ public class StringArrayUtils {
      * @return an array with identical contents in reverse order
      */ // TODO
     public static String[] reverse(String[] array) {
-        return null;
+        String[] revArray = new String[array.length];
+        int revArrayIndex = 0;
+        for (int i= array.length-1; i>= 0; i--) {
+            System.out.println(array[i]);
+            revArray[revArrayIndex] = array[i];
+            revArrayIndex++;
+        }
+        return revArray;
     }
 
     /**
@@ -75,6 +92,9 @@ public class StringArrayUtils {
      * @return number of occurrences the specified `value` has occurred
      */ // TODO
     public static int getNumberOfOccurrences(String[] array, String value) {
+//        for (int in=0-; in <= array.length; in++) {
+//
+//        }
         return 0;
     }
 
@@ -84,7 +104,10 @@ public class StringArrayUtils {
      * @return array with identical contents excluding values of `value`
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
-        return null;
+        List<String> arrList = new ArrayList<>(Arrays.asList(array));
+        arrList.remove(valueToRemove);
+        array = arrList.toArray(new String[0]);
+        return array;
     }
 
     /**
@@ -97,7 +120,8 @@ public class StringArrayUtils {
 
     /**
      * @param array array of chars
-     * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
+     * @return array of Strings with each consecutive duplicate occurrence concatenated
+     * as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
         return null;
