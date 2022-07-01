@@ -1,6 +1,5 @@
 package com.zipcodewilmington;
 
-import java.lang.reflect.Type;
 import java.util.*;
 
 /**
