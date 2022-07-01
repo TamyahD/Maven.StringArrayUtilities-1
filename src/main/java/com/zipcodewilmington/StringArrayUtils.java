@@ -1,8 +1,7 @@
 package com.zipcodewilmington;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.lang.reflect.Type;
+import java.util.*;
 
 /**
  * Created by leon on 1/29/18.
@@ -29,7 +28,7 @@ public class StringArrayUtils {
      * @return last element in specified array
      */ // TODO
     public static String getLastElement(String[] array) {
-        return array[array.length-1];
+        return array[array.length - 1];
     }
 
     /**
@@ -37,7 +36,7 @@ public class StringArrayUtils {
      * @return second to last element in specified array
      */ // TODO
     public static String getSecondToLastElement(String[] array) {
-        return array[array.length-2];
+        return array[array.length - 2];
     }
 
     /**
@@ -60,14 +59,9 @@ public class StringArrayUtils {
      * @return an array with identical contents in reverse order
      */ // TODO
     public static String[] reverse(String[] array) {
-        String[] revArray = new String[array.length];
-        int revArrayIndex = 0;
-        for (int i= array.length-1; i>= 0; i--) {
-            System.out.println(array[i]);
-            revArray[revArrayIndex] = array[i];
-            revArrayIndex++;
-        }
-        return revArray;
+        Collections.reverse(Arrays.asList(array));
+//        System.out.print(Arrays.asList(array));
+        return array;
     }
 
     /**
@@ -75,7 +69,14 @@ public class StringArrayUtils {
      * @return true if the order of the array is the same backwards and forwards
      */ // TODO
     public static boolean isPalindromic(String[] array) {
-        return false;
+        int count = 0;
+        boolean pal = false;
+        for (String str : array) {
+            if (array[array.length - 1] == array[count]) {
+                pal = true;
+            }
+        }
+        return pal;
     }
 
     /**
@@ -83,7 +84,16 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
-        return false;
+        boolean isPangram = true;
+        String[] alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+        String arrayToString = Arrays.toString(array).toLowerCase();
+
+        for (int idx=0; idx <= alphabet.length -1; idx++) {
+            if (!(arrayToString.contains(alphabet[idx]))) {
+                isPangram = false;
+            }
+        }
+        return isPangram;
     }
 
     /**
@@ -92,10 +102,13 @@ public class StringArrayUtils {
      * @return number of occurrences the specified `value` has occurred
      */ // TODO
     public static int getNumberOfOccurrences(String[] array, String value) {
-//        for (int in=0-; in <= array.length; in++) {
-//
-//        }
-        return 0;
+        int count = 0;
+        for (String str : array) {
+            if (str.equals(value)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     /**
@@ -115,7 +128,14 @@ public class StringArrayUtils {
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
-        return null;
+        int idx = 0;
+        for (int i = 1; i < array.length; i++) {
+            if (array[idx] != array[i]) {
+                idx++;
+                array[idx] = array[i];
+            }
+        }
+        return Arrays.copyOfRange(array, 0, idx + 1);
     }
 
     /**
@@ -124,8 +144,17 @@ public class StringArrayUtils {
      * as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-        return null;
+        String[] newArr = new String[array.length];
+        int idxShift = 0;
+        for (int i = 0; i < array.length; i++) {
+            newArr[idxShift] = array[i];
+            while(i +1 < array.length && array[i].equals(array[i+1])) {
+                newArr[idxShift] += array[i];
+                i++;
+            }
+            idxShift++;
+        }
+        String[] list = Arrays.copyOfRange(newArr, 0, idxShift);
+        return list;
     }
-
-
 }
